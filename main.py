@@ -1,34 +1,5 @@
-# main.py (位于 tauren_scritpt_main/main.py)
+from .douyin.douyin import Douyin  # 使用点号表示相对导入，
 
-# 当使用 python -m tauren_scritpt_main.main 运行时,
-# tauren_scritpt_main 是顶级包。
-# 'douyin' 是 tauren_scritpt_main 包下的一个子包/模块目录。
-from .douyin.douyin import Douyin  # 使用点号表示相对导入，或者...
-
-# from tauren_scritpt_main.douyin.douyin import Douyin # 使用绝对导入，如果包名不含非法字符
-
-# 由于包名 tauren_scritpt_main 包含连字符 '-'，这在Python包名中是不推荐的，
-# 直接使用 from tauren_scritpt_main... 可能不起作用。
-# 使用相对导入 .douyin.douyin 通常更安全。
-# 或者，如果您的PYTHONPATH设置正确，并且从 tauren-scritpt-main11 运行 -m，
-# 那么 from tauren_scritpt_main.douyin.douyin import Douyin 理论上应该有效，
-# 但Python对包名中的连字符处理有时会比较棘手。
-
-# 为了简单和可靠，让我们尝试确保Python能找到它。
-# 如果上面的相对导入 (from .douyin.douyin import Douyin) 出现问题
-# (例如 "ImportError: attempted relative import with no known parent package"
-#  如果 main.py 没有被作为包的一部分正确执行)，
-# 那么一个更明确的方式是，确保 tauren_scritpt_main 确实在 sys.path
-# 并且直接从它开始导入。
-
-# 当你使用 `python -m tauren_scritpt_main.main` 时，
-# `tauren_scritpt_main` 应该已经是 Python 知道的一个包了。
-# 此时 `main.py` 内部的 `from douyin.douyin import Douyin` 应该解析为
-# `tauren_scritpt_main.douyin.douyin`
-
-# 让我们坚持最初的 main.py 写法，并再次确认运行方式
-# main.py 原始内容:
-# from douyin.douyin import Douyin
 
 dou_yin = Douyin("douyin.text", "match_video.text", "match_comment.text")
 
