@@ -1,4 +1,3 @@
-# 在 load.py 的顶部添加
 import sys
 import os
 
