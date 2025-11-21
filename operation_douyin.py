@@ -3,10 +3,7 @@ from helium import *
 
 
 class Operation:
-
-    #
     # 用户作品评论
-    #
     def user_video_comment(self, operation_num, match_video_items, match_comment_item_map):
         total_user_video_count = int(find_all(S("//span[@data-e2e='user-tab-count']"))[0].web_element.text)
         if total_user_video_count > 0:
@@ -19,9 +16,7 @@ class Operation:
                 hover(user_video_label_items[user_video_label_item_count].web_element)
         print("评论成功")
 
-    #
     # 视频评论
-    #
     def video_comment(self, match_comment_item_map):
         time.sleep(3)
         video_desc_label_items = find_all(S("//div[@data-e2e='video-desc']"))
@@ -35,9 +30,7 @@ class Operation:
                 press(ENTER)
         print("评论成功")
 
-    #
     # 视频评论区评论
-    #
     def video_discuss_comment(self, match_comment_item_map):
         time.sleep(3)
         press("x")
@@ -47,7 +40,6 @@ class Operation:
             # '大家都在搜：泰山爬到山顶需要几小时全部评论(28710)'
             video_comment_count_text = video_comment_count_label_items[0].web_element.text
             total_video_comment_count = self._get_comment_total_count(video_comment_count_text)
-        # 20初始化
         comment_class = ""
         comment_context_class = ""
         while True:
@@ -72,9 +64,7 @@ class Operation:
             hover(video_comment_label_items[video_comment_label_item_count].web_element)
         self.video_comment(match_comment_item_map)
 
-    #
     # 处理用户作品评论
-    #
     def _handle_user_video_comment(self, operation_num, user_video_label_items, match_video_items, match_comment_item_map):
         handle_count = len(user_video_label_items)
         for index in range(handle_count):
@@ -96,9 +86,7 @@ class Operation:
                 print("err: {e}")
                 continue
 
-    #
     # 处理视频评论区评论
-    #
     def _handle_video_discuss_comment(self, handle_count, comment_class, comment_context_class, match_comment_item_map):
         for index in range(handle_count):
             try:
@@ -117,9 +105,7 @@ class Operation:
                 print("err: {e}")
                 continue
 
-    #
     # 视频点赞
-    #
     @staticmethod
     def video_click_like():
         time.sleep(3)
@@ -130,9 +116,7 @@ class Operation:
         else:
             print("该视频已经点赞啦")
 
-    #
     # 用户关注
-    #
     @staticmethod
     def user_click_follow():
         time.sleep(3)
@@ -148,9 +132,7 @@ class Operation:
             click("关注")
             print("关注成功")
 
-    #
     # 匹配消息
-    #
     @staticmethod
     def _match_comment(video_desc, match_comment_item_map):
         for key, value in match_comment_item_map.items():
@@ -158,9 +140,7 @@ class Operation:
                 return value
         return ""
 
-    #
-    # 匹配视频
-    #
+    # 匹配视频    
     @staticmethod
     def _match_video(video_desc, match_video_items):
         for match_video_item in match_video_items:
@@ -168,9 +148,7 @@ class Operation:
                 return True
         return False
 
-    #
     # 获取内容评论总条数
-    #
     @staticmethod
     def _get_comment_total_count(video_comment_count_text):
         return video_comment_count_text[video_comment_count_text.find("(") + 1:video_comment_count_text.find(")")]
