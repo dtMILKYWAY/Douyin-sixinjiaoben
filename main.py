@@ -1,4 +1,4 @@
-from .douyin.douyin import Douyin  # 使用点号表示相对导入，
+from .douyin.douyin import Douyin  
 
 
 dou_yin = Douyin("douyin.text", "match_video.text", "match_comment.text")
@@ -22,7 +22,6 @@ def select_platform():
             print("输入有误")
 
 
-# ... (main.py 的其余部分保持不变) ...
 def select_douyin_function():
     while True:
         print("抖音功能:")
@@ -76,7 +75,7 @@ def select_douyin_message_monitoring():
                 print("登录失败，无法进行私信回复设置。")
                 return
 
-        print("\n私信自动回复功能:")  # 加个换行美观一些
+        print("\n私信自动回复功能:") 
         print("1.开始监控私信")
         print("2.停止监控私信")
         print("3.设置自定义回复消息")
@@ -142,7 +141,7 @@ def select_douyin_message_monitoring():
                 print("输入有误")
         elif monitoring_num == "8":
             try:
-                # from utils.coze_client import CozeClient # CozeClient 实例已在 Douyin 类中
+                # CozeClient 实例已在 Douyin 类中
                 print("测试Coze API连接...")
                 print(f"使用令牌: {dou_yin.coze_token[:5]}... Bot ID: {dou_yin.coze_bot_id}")
                 test_message = "你好，请做个简单自我介绍"
