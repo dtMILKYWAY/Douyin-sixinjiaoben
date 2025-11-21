@@ -36,7 +36,7 @@ def select_douyin_function():
         elif function_num == "3":
             select_douyin_message_monitoring()
         elif function_num == "4":
-            select_platform()  # 返回 select_platform
+            select_platform()
         else:
             print("输入有误")
 
@@ -50,10 +50,10 @@ def select_douyin_operation(function_num):
         operation_num = input("请选择抖音操作:")
         if operation_num == "1" or operation_num == "2"
 
-            if not dou_yin.is_login:  # 直接检查一次
+            if not dou_yin.is_login:  
                 print("请先登录...")
                 dou_yin.login()
-                if not dou_yin.is_login:  # 如果登录失败则不继续
+                if not dou_yin.is_login: 
                     print("登录失败，无法继续操作。")
                     continue  # 回到操作选择
 
@@ -62,7 +62,7 @@ def select_douyin_operation(function_num):
             elif function_num == "2":
                 dou_yin.search_video(operation_num)
         elif operation_num == "3":
-            select_douyin_function()  # 返回 select_douyin_function
+            select_douyin_function()  
         else:
             print("输入有误")
 
@@ -71,11 +71,10 @@ def select_douyin_message_monitoring():
     while True:
         if not dou_yin.is_login:
             print("请先登录...")
-            dou_yin.login()  # 尝试登录
-            if not dou_yin.is_login:  # 如果登录仍然失败
+            dou_yin.login()  
+            if not dou_yin.is_login: 
                 print("登录失败，无法进行私信回复设置。")
-                return  # 或 select_douyin_function() 返回上一级
-            # continue # 如果登录成功，不需要 continue，直接显示菜单
+                return
 
         print("\n私信自动回复功能:")  # 加个换行美观一些
         print("1.开始监控私信")
@@ -145,14 +144,10 @@ def select_douyin_message_monitoring():
             try:
                 # from utils.coze_client import CozeClient # CozeClient 实例已在 Douyin 类中
                 print("测试Coze API连接...")
-                # dou_yin.coze_token 和 dou_yin.coze_bot_id 是 Douyin 实例的属性
-                # dou_yin.system_prompt 也是
                 print(f"使用令牌: {dou_yin.coze_token[:5]}... Bot ID: {dou_yin.coze_bot_id}")
                 test_message = "你好，请做个简单自我介绍"
                 print(f"发送测试消息: {test_message} (使用当前系统提示词: {dou_yin.system_prompt[:30]}...)")
-                # 直接使用 dou_yin 实例中的 coze_client
                 if hasattr(dou_yin, 'coze_client') and dou_yin.coze_client is not None:
-                    # 确保 coze_client 的 debug 模式与 dou_yin 一致
                     dou_yin.coze_client.debug_mode = dou_yin.debug_mode
                     response = dou_yin.coze_client.get_response(test_message, dou_yin.system_prompt)
                     print(f"收到回复: {response}")
@@ -164,8 +159,8 @@ def select_douyin_message_monitoring():
                 import traceback
                 traceback.print_exc()
         elif monitoring_num == "9":
-            select_douyin_function()  # 返回 select_douyin_function
-            break  # 跳出当前while True循环
+            select_douyin_function()  
+            break  
         else:
             print("输入有误")
 
