@@ -48,12 +48,7 @@ def select_douyin_operation(function_num):
         print("2.评论区评论模式")
         print("3.返回上一级")
         operation_num = input("请选择抖音操作:")
-        if operation_num == "1" or operation_num == "2":
-            # 移除了这个循环，因为登录检查在 select_douyin_message_monitoring 中也有
-            # if not dou_yin.is_login:
-            #     print("请先登录...")
-            #     dou_yin.login() # 确保在操作前登录
-            #     continue # 重新检查登录状态或直接继续
+        if operation_num == "1" or operation_num == "2"
 
             if not dou_yin.is_login:  # 直接检查一次
                 print("请先登录...")
