@@ -95,8 +95,6 @@ class CozeClient:
                                 if self.debug_mode: print(
                                     f"      -> Delta answer appended: current full = '{final_answer_content[:70]}...'")
 
-                        # 另外，您的日志显示 `event:conversation.message.completed` 中也有 `type:answer`
-                        # 这通常包含完整的消息。如果 delta 也在累积，我们需要决定哪个优先。
                         # Coze 文档："仅解析流式响应的智能体回复部分 ... 在事件 event:conversation.message.completed中，取 type=answer 的事件"
                         # 这表明 `completed` 事件中的 `type=answer` 是最终的。
                         elif event_name == "conversation.message.completed" and message_type == "answer" and content_type == "text":
@@ -106,11 +104,9 @@ class CozeClient:
                                 if self.debug_mode: print(
                                     f"      -> Completed answer set: '{final_answer_content[:70]}...'")
 
-                        # 保留原始的 full_raw_response_for_pp_check 逻辑，以防万一 API 返回了您之前看到的那种重复格式
-                        # 在您的日志中，这种 "AnswerAnswerFollowUp" 的模式是在 type=answer 的 content 里直接出现的
+                        
                         if message_type == "answer" and content_type == "text" and isinstance(content, str):
-                            # 这个 content 可能就是您之前看到的 "禁止私加微信哦禁止私加微信哦有什么更好的交流方式吗？..."
-                            # 我们将用这个进行启发式检查
+                            
                             if len(content) > len(full_raw_response_for_pp_check):  # 取最长的那个作为启发式检查的源
                                 full_raw_response_for_pp_check = content
 
@@ -146,7 +142,7 @@ class CozeClient:
 
                 if processed_answer_from_pp:
                     final_answer_content = processed_answer_from_pp
-                else:  # 如果启发式也失败，就用原始的（可能包含后续问题的）
+                else:  
                     final_answer_content = full_raw_response_for_pp_check
                     if self.debug_mode: print(f"    Heuristic PP no match. Using raw: '{final_answer_content}'")
             else:
